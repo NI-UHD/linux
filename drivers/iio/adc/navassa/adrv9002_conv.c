@@ -6,6 +6,7 @@
  *
  * Licensed under the GPL-2.
  */
+#define DEBUG
 #include <linux/bitfield.h>
 #include <linux/bits.h>
 #include <linux/module.h>
