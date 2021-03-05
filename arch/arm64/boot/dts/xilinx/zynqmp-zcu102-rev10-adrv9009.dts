@@ -10,33 +10,33 @@
  *
  * Copyright (C) 2019 Analog Devices Inc.
  */
-#include "zynqmp-zcu102-rev1.0.dts"
 #include <dt-bindings/interrupt-controller/irq.h>
 #include <dt-bindings/jesd204/adxcvr.h>
 
-&i2c1 {
-	i2c-mux@75 {
-// 		i2c@0 { /* HPC0 */
-// 			#address-cells = <1>;
-// 			#size-cells = <0>;
-// 			reg = <0>;
-// 			/* HPC0_IIC */
-// 			ad7291@2f {
-// 				compatible = "adi,ad7291";
-// 				reg = <0x2f>;
-// 			};
-//
-// 			eeprom@50 {
-// 				compatible = "at24,24c02";
-// 				reg = <0x50>;
-// 			};
-//
-// 		};
-		i2c@1 { /* HPC1 */
-			#address-cells = <1>;
-			#size-cells = <0>;
-			reg = <1>;
-			/* HPC0_IIC */
+
+
+&i2c0 {
+	i2c-mux@73 {
+            	compatible = "nxp,pca9548";
+            	#address-cells = <1>;
+            	#size-cells = <0>;
+            	reg = <0x73>;
+            	i2c-mux-idle-disconnect;
+            	i2c@0 { // MCLK TEBF0808 SI5338A, 570FBB000290DG_unassembled
+        	        #address-cells = <1>;
+	                #size-cells = <0>;
+                	reg = <0>;
+            	};
+            	i2c@1 { // Custom carrier PLL
+                	#address-cells = <1>;
+                	#size-cells = <0>;
+                	reg = <1>;
+            	};
+
+            	i2c@3 { // Custom carrier FMC
+                	#address-cells = <1>;
+                	#size-cells = <0>;
+                	reg = <3>;
 			ad7291@2f {
 				compatible = "adi,ad7291";
 				reg = <0x2f>;
@@ -47,8 +47,26 @@
 				reg = <0x50>;
 			};
 
-		};
-
+            	};
+            	i2c@4 { // Custom carrier EEPROM
+	                #address-cells = <1>;
+	                #size-cells = <0>;
+                	reg = <4>;
+            	};
+      	      	i2c@5 { // Custom carrier external
+        	        #address-cells = <1>;
+        	        #size-cells = <0>;
+        	        reg = <5>;
+	                eeprom: eeprom@50 {
+                    	compatible = "atmel,24c08";
+                    	reg = <0x50>;
+                  	};
+            	};
+            	i2c@6 { // Custom carrier SFP
+                	#address-cells = <1>;
+                	#size-cells = <0>;
+                	reg = <6>;
+            	};
 	};
 };
 
