@@ -13,6 +13,44 @@
 #include <dt-bindings/interrupt-controller/irq.h>
 #include <dt-bindings/jesd204/adxcvr.h>
 
+&i2c0 {
+	i2c-mux@73 {
+// 		i2c@0 { /* HPC0 */
+// 			#address-cells = <1>;
+// 			#size-cells = <0>;
+// 			reg = <0>;
+// 			/* HPC0_IIC */
+// 			ad7291@2f {
+// 				compatible = "adi,ad7291";
+// 				reg = <0x2f>;
+// 			};
+//
+// 			eeprom@50 {
+// 				compatible = "at24,24c02";
+// 				reg = <0x50>;
+// 			};
+//
+// 		};
+		i2c@3 { /* HPC1 */
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <1>;
+			/* HPC0_IIC */
+			ad7291@2f {
+				compatible = "adi,ad7291";
+				reg = <0x2f>;
+			};
+
+			eeprom@50 {
+				compatible = "at24,24c02";
+				reg = <0x50>;
+			};
+
+		};
+
+	};
+};
+
 / {
 	fpga_axi: fpga-axi@0 {
 		interrupt-parent = <&gic>;
